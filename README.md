@@ -30,3 +30,4 @@ To verify a JWT with a public key from the `resources` folder:
 ```elixir
 Signatures.verify("eyJ0e...zTVTA", "idam_stub_pub.pem")
 ```
+Feel free to modify the functions in the `Signatures` module to fine-tune the claims in generated tokens!
