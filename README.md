@@ -4,7 +4,7 @@ Helper functions to create, sign and verify [JSON Web Tokens](http://jwt.io) for
 ### CLI Commands
 To generate a private RSA key:
 ```
-openssl genrsa -out mykey.pem 1024
+openssl genrsa -out mykey.pem 2048
 ```
 
 To derive a public key from the private key:
