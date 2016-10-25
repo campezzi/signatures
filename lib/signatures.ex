@@ -1,5 +1,5 @@
 defmodule Signatures do
-  def sign(claims, key \\ "idam_stub.pem") do
+  def sign(claims, key \\ "primary.pem") do
     opts = %{
       alg: "RS256",
       key: JsonWebToken.Algorithm.RsaUtil.private_key("resources", key)
@@ -10,7 +10,7 @@ defmodule Signatures do
     |> JsonWebToken.sign(opts)
   end
 
-  def verify(signature, key \\ "idam_stub_pub.pem") do
+  def verify(signature, key \\ "primary_pub.pem") do
     opts = %{
       alg: "RS256",
       key: JsonWebToken.Algorithm.RsaUtil.public_key("resources", key)
