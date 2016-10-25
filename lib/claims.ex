@@ -28,4 +28,11 @@ defmodule Signatures.Claims do
     {ms, s, _} = :os.timestamp
     ms * 1_000_000 + s
   end
+
+  def for_task_service do
+    valid
+    |> put(:iss, "https://dev.login.myob.com/")
+    |> put(:aud, "b764bd7b-8cb6-43f1-ae63-533522b679b9")
+    |> put(:scp, "task_service.basic")
+  end
 end
