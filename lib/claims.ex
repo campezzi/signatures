@@ -24,7 +24,7 @@ defmodule Signatures.Claims do
 
   def put(claims, field, value), do: Map.put(claims, field, value)
 
-  def now do
+  defp now do
     {ms, s, _} = :os.timestamp
     ms * 1_000_000 + s
   end
