@@ -18,16 +18,35 @@ iex -S mix
 ```
 
 ### IEx Commands
-To generate a valid JWT with a key from the `resources` folder (replace `idam_stub.pem` with the key you want to use to sign the token):
+To generate valid JWT claims, use `Signature.Claims.valid`:
 ```elixir
-Signatures.generate_valid_token("idam_stub.pem")
+claims = Signatures.Claims.valid
 ```
-To generate a JWT with invalid claims (expired):
+
+You can then modify specific claims with `Signature.Claims.put`
 ```elixir
-Signatures.generate_invalid_token("idam_stub.pem")
+modified_claims =
+  claims
+  |> Signatures.Claims.put(:scp, "my.custom.scope")
 ```
-To verify a JWT with a public key from the `resources` folder:
+
+Helpers are provided to invalidate claims `exp` (with an expiration date in the past) and `nbf` (with a not before date in the future):
+```elixir
+claims_with_invalid_expiration =
+  claims
+  |> Signatures.Claims.invalidate(:exp)
+
+claims_with_invalid_not_before =
+  claims
+  |> Signatures.Claims.invalidate(:nbf)
+```
+
+To generate a signed JWT from a claims struct with a key from the `resources` folder (replace `idam_stub.pem` with the key you want to use to sign the token):
+```elixir
+Signatures.sign(claims, "idam_stub.pem")
+```
+
+To verify a JWT was signed with a public key from the `resources` folder:
 ```elixir
 Signatures.verify("eyJ0e...zTVTA", "idam_stub_pub.pem")
 ```
-Feel free to modify the functions in the `Signatures` module to fine-tune the claims in generated tokens!
