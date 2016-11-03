@@ -13,21 +13,25 @@ defmodule Signatures.Claims do
 
   def valid do
     %__MODULE__{}
-    |> put(:exp, now + 50 * 365 * 24 * 3600) # expires 50 years from now
-    |> put(:nbf, now - 30 * 60)
-    |> put(:iat, now - 30 * 60)
+    |> put(:exp, future)
+    |> put(:nbf, past)
+    |> put(:iat, past)
   end
 
-  def invalidate(claims, :exp), do: put(claims, :exp, now - 30 * 60)
-  def invalidate(claims, :nbf), do: put(claims, :nbf, now + 30 * 60)
+  def invalidate(claims, :exp), do: put(claims, :exp, past)
+  def invalidate(claims, :nbf), do: put(claims, :nbf, future)
   def invalidate(claims, _), do: claims
 
   def put(claims, field, value), do: Map.put(claims, field, value)
 
-  defp now do
-    {ms, s, _} = :os.timestamp
-    ms * 1_000_000 + s
+  def now do
+    {megasecs, secs, _} = :os.timestamp
+    megasecs * 1_000_000 + secs
   end
+
+  def past, do: now - 30 * 60
+
+  def future, do: now + 50 * 365 * 24 * 3600
 
   def for_task_service do
     valid
