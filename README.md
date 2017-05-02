@@ -50,3 +50,8 @@ To verify a JWT was signed with a public key from the `resources` folder:
 ```elixir
 Signatures.verify("eyJ0e...zTVTA", "idam_stub_pub.pem")
 ```
+
+To generate a JWK from a PEM in the `resources` folder:
+```elixir
+Signatures.extract_jwk("primary.pem")
+```
