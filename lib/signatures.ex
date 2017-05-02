@@ -1,8 +1,9 @@
 defmodule Signatures do
-  def sign(claims, key \\ "primary.pem") do
+  def sign(claims, key \\ "primary.pem", kid \\ "Mb19SlygIrl-NRLZCwGZU-7UZuM") do
     opts = %{
       alg: "RS256",
-      key: JsonWebToken.Algorithm.RsaUtil.private_key("resources", key)
+      key: JsonWebToken.Algorithm.RsaUtil.private_key("resources", key),
+      kid: kid
     }
 
     claims
