@@ -27,6 +27,9 @@ defmodule Signatures.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:json_web_token, "~> 0.2"}]
+    [
+      {:json_web_token, "~> 0.2"},
+      {:jose, "~> 1.8"}
+    ]
   end
 end
