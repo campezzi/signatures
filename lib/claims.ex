@@ -39,4 +39,10 @@ defmodule Signatures.Claims do
     |> put(:aud, "b764bd7b-8cb6-43f1-ae63-533522b679b9")
     |> put(:scp, "task_service.basic")
   end
+
+  def for_bulk_service do
+    valid
+    |> put(:iss, "http://stubs.bulktask.teamdagobah.com:5001/")
+    |> put(:aud, "99894bd0-2565-4bb3-8a53-fd2fff226bae")
+  end
 end
